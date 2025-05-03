@@ -16,9 +16,9 @@ const Login = () => {
     // console.log(email,password)
     singIn(email,password)
     .then((result) => {
-      // const user=result.user;
+      const user=result.user;
       alert("LogIn successful  ")
-    //  console.log(result)
+     console.log(user)
      navigate(`${location.state? location.state :"/"}`)
     })
     .catch((error) => {
