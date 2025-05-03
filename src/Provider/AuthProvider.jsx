@@ -5,12 +5,14 @@ import app from '../Firevase/Firebase.config';
 const auth = getAuth(app);
 const AuthProvider = ({children}) => {
    const [user,setUser]=useState(null);
-
-    console.log(user)
+    const [loading,setLoading]=useState(true)
+    console.log(loading ,user)
    const createUSer=(email,password)=>{
+    setLoading(true);
     return createUserWithEmailAndPassword(auth,email,password)
    }
    const singIn=(email,password)=>{
+    setLoading(true);
     return signInWithEmailAndPassword(auth,email,password)
    }
     
@@ -20,7 +22,8 @@ const AuthProvider = ({children}) => {
    }
     useEffect(()=>{
     const unsubcribe=    onAuthStateChanged(auth,(currentUser)=>{
-            setUser(currentUser)
+            setUser(currentUser);
+            setLoading(false)
         })
         return()=>{
             unsubcribe();
@@ -32,7 +35,9 @@ const AuthProvider = ({children}) => {
     setUser,
     createUSer,
     logOut,
-    singIn
+    singIn,
+    setLoading,
+    loading
    };
     return <AuthContext value={authData}>{children}</AuthContext>
 };

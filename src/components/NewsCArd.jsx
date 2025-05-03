@@ -3,6 +3,7 @@ import { FaEye, FaStar } from "react-icons/fa";
 import { format } from "date-fns";
 import { CiShare2 } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
+import { Link } from 'react-router';
 const NewsCArd = ({news}) => {
     const {
         title,
@@ -11,6 +12,7 @@ const NewsCArd = ({news}) => {
         total_view,
         thumbnail_url,
         details,
+        id,
         // tags,
       } = news;
     
@@ -47,10 +49,10 @@ const NewsCArd = ({news}) => {
             {details.length > 200 ? (
             <>
             {details.slice(0, 200)}...
-            <span className="text-[#FF8C47] font-semibold
+            <Link to={`/news-detales/${id}`} className="text-[#FF8C47] font-semibold
             cursor-pointer hover:underline">
             Read More
-            </span>
+            </Link>
             </>
             ):(
             details
