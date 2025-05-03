@@ -1,6 +1,7 @@
 import React, { use, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
+import { sendEmailVerification } from 'firebase/auth';
 
 const Register = () => {
   const [nameError,setNameError]=useState("");
@@ -25,7 +26,11 @@ const Register = () => {
         createUSer(email,password)
         .then((result) => {
          const user=result.user;
-          alert("successful  account")
+         console.log
+          // alert("successful  account")
+          sendEmailVerification(user).then(() => {
+            alert("Account created! Verification email sent.");
+          });
           updateUser({ displayName:name, photoURL:photo}).then(()=>{
             setUser({...result, displayName:name, photoURL:photo})
             nagigate("/")

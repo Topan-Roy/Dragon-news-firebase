@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 export const AuthContext=createContext();
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged,  sendPasswordResetEmail,  signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import app from '../Firevase/Firebase.config';
 const auth = getAuth(app);
 const AuthProvider = ({children}) => {
@@ -22,6 +22,9 @@ const AuthProvider = ({children}) => {
    const logOut=()=>{
     return signOut(auth)
    }
+   const forgetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
     useEffect(()=>{
     const unsubcribe=    onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser);
@@ -40,7 +43,8 @@ const AuthProvider = ({children}) => {
     singIn,
     setLoading,
     loading,
-    updateUser
+    updateUser,
+    forgetPassword
    };
     return <AuthContext value={authData}>{children}</AuthContext>
 };
