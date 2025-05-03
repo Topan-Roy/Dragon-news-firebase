@@ -12,11 +12,12 @@ const Login = () => {
     e.preventDefault();
     const email =e.target.email.value;
     const password =e.target.password.value;
-    console.log(email,password)
+    // console.log(email,password)
     singIn(email,password)
     .then((result) => {
+      // const user=result.user;
       alert("LogIn successful  ")
-     console.log(result)
+    //  console.log(result)
      navigate(`${location.state? location.state :"/"}`)
     })
     .catch((error) => {
@@ -41,7 +42,7 @@ const Login = () => {
           <div><a className="link link-hover">Forgot password?</a></div>
 
          {error&& <p className='text-red-500 text-xs'>{error}</p>}
-         
+
           <button className="btn btn-neutral mt-4">Login</button>
           <p className='font-bold text-center pt-5'>Dont’t Have An Account ? <Link className='text-secondary' to='/auth/register'>Register</Link></p>
         </form>
