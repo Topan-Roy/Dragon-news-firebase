@@ -5,6 +5,9 @@ import {
 import Root from "../Layout/Root";
 import Home from "../Pages/Home";
 import CatagoriNews from "../Pages/CatagoriNews";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+import AuthLayout from "../Layout/AuthLayout";
 
   export const router = createBrowserRouter([
     {
@@ -24,7 +27,17 @@ import CatagoriNews from "../Pages/CatagoriNews";
     },
     {
       path: "/auth",
-      element: <div>auth</div>,
+      Component:AuthLayout,
+      children:[
+        {
+          path:'/auth/login',
+          Component:Login
+        },
+        {
+          path:'/auth/register',
+          Component:Register
+        },
+      ]
     },
     {
       path: "/news",
